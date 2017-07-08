@@ -173,6 +173,7 @@
 								scope.$apply();
 							},
 							onAdd: function (/**Event*/evt) {
+								evt.clone = false;
 								_sync(evt);
 								_emitEvent(evt, removed);
 								scope.$apply();
