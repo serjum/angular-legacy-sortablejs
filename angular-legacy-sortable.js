@@ -67,6 +67,7 @@
 					var rhs = match[2];
 
 					return function postLink(scope, $el) {
+						scope.ngSortable.isAngular = true;
 						var itemsExpr = $parse(rhs);
 						var getSource = function getSource() {
 							return itemsExpr(scope.$parent) || [];
@@ -78,7 +79,7 @@
 							watchers = [],
 							offDestroy,
 							sortable
-						;
+							;
 
 						el[expando] = getSource;
 
@@ -117,9 +118,9 @@
 									removed = angular.copy(removed);
 									prevItems.splice(Sortable.utils.index(evt.clone, sortable.options.draggable), 0, prevItems.splice(oldIndex, 1)[0]);
 
-									if (evt.from.contains(evt.clone)) {
-										evt.from.removeChild(evt.clone);
-									}
+									// if (evt.from.contains(evt.clone)) {
+									// 	evt.from.removeChild(evt.clone);
+									// }
 								}
 								else {
 									prevItems.splice(oldIndex, 1);
@@ -127,14 +128,14 @@
 
 								items.splice(newIndex, 0, removed);
 
-								evt.from.insertBefore(evt.item, nextSibling); // revert element
+								// evt.from.insertBefore(evt.item, nextSibling); // revert element
 							}
 							else {
 								items.splice(newIndex, 0, items.splice(oldIndex, 1)[0]);
 
 								// move ng-repeat comment node to right position
 								if (nextSibling.nodeType === Node.COMMENT_NODE) {
-									evt.from.insertBefore(nextSibling, evt.item.nextSibling);
+									// evt.from.insertBefore(nextSibling, evt.item.nextSibling);
 								}
 							}
 
@@ -173,6 +174,7 @@
 								scope.$apply();
 							},
 							onAdd: function (/**Event*/evt) {
+
 								evt.clone = false;
 								_sync(evt);
 								_emitEvent(evt, removed);
