@@ -175,7 +175,9 @@
 							},
 							onAdd: function (/**Event*/evt) {
 
-								evt.clone = false;
+								if(Sortable.active && Sortable.active.lastPullMode !== "clone") {
+									evt.clone = false;
+								}
 								_sync(evt);
 								_emitEvent(evt, removed);
 								scope.$apply();
