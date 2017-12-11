@@ -100,6 +100,9 @@
 
 						function _sync(/**Event*/evt) {
 							var items = getSource();
+              if(!Array.isArray(items)) {
+                items =  Object.keys(items);
+              }
 
 							if (!items) {
 								// Without ng-repeat
@@ -111,6 +114,9 @@
 
 							if (el !== evt.from) {
 								var prevItems = evt.from[expando]();
+								if(!Array.isArray(prevItems)) {
+									prevItems =  Object.keys(prevItems);
+								}
 
 								removed = prevItems[oldIndex];
 
